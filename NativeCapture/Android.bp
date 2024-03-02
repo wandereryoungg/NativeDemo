@@ -1,0 +1,33 @@
+cc_defaults {
+    name: "NativeCapture_defaults",
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wunused",
+        "-Wunreachable-code",
+        "-Wno-deprecated-declarations",
+        "-fexceptions",
+    ],
+
+    shared_libs: [
+        "libbase",
+        "libbinder",
+        "libcutils",
+        "liblog",
+        "libutils",
+        "libmediandk",
+        "libnativewindow",
+        "libcamera2ndk",
+        "libOpenSLES",
+    ],
+}
+
+// ===========================================================
+
+cc_binary {
+    name: "NativeCapture",
+    system_ext_specific: true,
+    defaults: ["NativeCapture_defaults"],
+    srcs: ["CameraCapture.cpp", "AudioUtil.cpp", "main_test.cpp", "YoungTest.cpp"],
+}
