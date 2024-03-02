@@ -136,7 +136,7 @@ void CameraCapture::onImageAvailable(void* obj, AImageReader* reader) {
 void CameraCapture::handleImageAvailable(AImageReader* reader) {
 	std::lock_guard<std::mutex> lock(mImageMutex);
 
-    usleep(100000);
+	usleep(100000);
 
 	AImage* outImage = nullptr;
 	media_status_t ret;
@@ -305,7 +305,7 @@ int CameraCapture::initCamera() {
 		return ret;
 	}
 
-    std::vector<int32_t> fpsRanges = { 60, 60 };
+	std::vector<int32_t> fpsRanges = { 60, 60 };
 	ret = ACaptureRequest_setEntry_i32(mCaptureRequest, ACAMERA_CONTROL_AE_TARGET_FPS_RANGE, fpsRanges.size(), fpsRanges.data());
 	if (ret != AMEDIA_OK) {
 		ALOGE("ACaptureRequest_setEntry_i32 failed, ret=%d", ret);

@@ -25,7 +25,7 @@ static constexpr uint32_t kDefaultImageCount = 32;
 
 
 template <typename T> class A {
-    friend T;
+	friend T;
 };
 using AA = A<int>;
 
