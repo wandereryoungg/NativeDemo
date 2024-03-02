@@ -80,7 +80,6 @@ void test() {
 	a.printAddress();
 
 	testSize<double>();
-	testFun();
 
 	testStr(3);
 
