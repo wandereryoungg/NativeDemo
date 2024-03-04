@@ -5,6 +5,7 @@
 #include <utils/RefBase.h>
 #include "AudioUtil.h"
 #include "YoungTest.h"
+#include "YoungTestPlus.h"
 
 using namespace android;
 
@@ -13,6 +14,7 @@ int main() {
 	sp<ProcessState> proc(ProcessState::self());
 	ProcessState::self()->startThreadPool();
 	YoungTest::getInstance();
+	YoungTestPlus::getInstance();
 	/*
 	CameraCapture::getInstance()->startCapture(1920, 1080);
 	*/

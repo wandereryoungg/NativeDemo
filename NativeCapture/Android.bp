@@ -29,5 +29,5 @@ cc_binary {
     name: "NativeCapture",
     system_ext_specific: true,
     defaults: ["NativeCapture_defaults"],
-    srcs: ["CameraCapture.cpp", "AudioUtil.cpp", "main_test.cpp", "YoungTest.cpp"],
+    srcs: ["CameraCapture.cpp", "AudioUtil.cpp", "main_test.cpp", "YoungTest.cpp", "YoungTestPlus.cpp"],
 }
