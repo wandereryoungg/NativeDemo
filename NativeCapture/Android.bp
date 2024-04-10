@@ -10,6 +10,15 @@ cc_defaults {
         "-fexceptions",
     ],
 
+    cppflags: [
+        "-Wall",
+        "-Werror",
+        "-Wunused",
+        "-Wunreachable-code",
+        "-Wno-deprecated-declarations",
+        "-fexceptions",
+    ],
+
     shared_libs: [
         "libbase",
         "libbinder",
@@ -20,6 +29,16 @@ cc_defaults {
         "libnativewindow",
         "libcamera2ndk",
         "libOpenSLES",
+    ],
+
+    include_dirs: ["hardware/rockchip/rknpu2/examples/3rdparty/opencv/OpenCV-android-sdk/sdk/native/jni/include"],
+
+    static_libs: [
+        "libopencv_calib3d_young",
+        "libopencv_core_young",
+        "libopencv_features2d_young",
+        "libopencv_imgcodecs_young",
+        "libopencv_imgproc_young",
     ],
 }
 

@@ -1,0 +1,74 @@
+cc_prebuilt_library_static {
+    name: "libopencv_calib3d_young",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["arm64-v8a/libopencv_calib3d.a"],
+        },
+        lib32: {
+            srcs: ["armeabi-v7a/libopencv_calib3d.a"],
+        },
+    },
+    check_elf_files: false,
+    vendor_available: true,
+}
+
+cc_prebuilt_library_static {
+    name: "libopencv_core_young",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["arm64-v8a/libopencv_core.a"],
+        },
+        lib32: {
+            srcs: ["armeabi-v7a/libopencv_core.a"],
+        },
+    },
+    check_elf_files: false,
+    vendor_available: true,
+}
+
+cc_prebuilt_library_static {
+    name: "libopencv_features2d_young",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["arm64-v8a/libopencv_features2d.a"],
+        },
+        lib32: {
+            srcs: ["armeabi-v7a/libopencv_features2d.a"],
+        },
+    },
+    check_elf_files: false,
+    vendor_available: true,
+}
+
+cc_prebuilt_library_static {
+    name: "libopencv_imgcodecs_young",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["arm64-v8a/libopencv_imgcodecs.a"],
+        },
+        lib32: {
+            srcs: ["armeabi-v7a/libopencv_imgcodecs.a"],
+        },
+    },
+    check_elf_files: false,
+    vendor_available: true,
+}
+
+cc_prebuilt_library_static {
+    name: "libopencv_imgproc_young",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["arm64-v8a/libopencv_imgproc.a"],
+        },
+        lib32: {
+            srcs: ["armeabi-v7a/libopencv_imgproc.a"],
+        },
+    },
+    check_elf_files: false,
+    vendor_available: true,
+}
