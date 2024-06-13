@@ -5,27 +5,30 @@
 #ifndef USB_DEVICE_CAMERACAPTURE_H
 #define USB_DEVICE_CAMERACAPTURE_H
 
-#include <mutex>
-#include <stdint.h>
-#include <media/NdkImage.h>
-#include <media/NdkImageReader.h>
-#include <camera/NdkCaptureRequest.h>
 #include <camera/NdkCameraCaptureSession.h>
 #include <camera/NdkCameraDevice.h>
 #include <camera/NdkCameraError.h>
 #include <camera/NdkCameraManager.h>
+#include <camera/NdkCaptureRequest.h>
+#include <media/NdkImage.h>
+#include <media/NdkImageReader.h>
+#include <stdint.h>
+
+#include <mutex>
+
 
 namespace android {
 
 static constexpr uint32_t kDefaultImageWidth = 1920;
 static constexpr uint32_t kDefaultImageHeight = 1080;
 static constexpr uint32_t kDefaultImageFormat = AIMAGE_FORMAT_YUV_420_888;
-static constexpr uint64_t kDefaultImageUsage = AHARDWAREBUFFER_USAGE_CPU_READ_OFTEN;
+static constexpr uint64_t kDefaultImageUsage =
+    AHARDWAREBUFFER_USAGE_CPU_READ_OFTEN;
 static constexpr uint32_t kDefaultImageCount = 32;
 
-
-template <typename T> class A {
-	friend T;
+template <typename T>
+class A {
+    friend T;
 };
 using AA = A<int>;
 
@@ -34,69 +37,78 @@ typedef B BB;
 
 class CameraCapture {
 public:
-	CameraCapture();
+    CameraCapture();
 
-	~CameraCapture();
+    ~CameraCapture();
 
-	static CameraCapture* getInstance();
+    static CameraCapture* getInstance();
 
-	int startCapture(int32_t width = kDefaultImageWidth, int32_t height = kDefaultImageHeight, int32_t format = kDefaultImageFormat, uint64_t usage = kDefaultImageUsage, int32_t maxImages = kDefaultImageCount);
+    int startCapture(int32_t width = kDefaultImageWidth,
+                     int32_t height = kDefaultImageHeight,
+                     int32_t format = kDefaultImageFormat,
+                     uint64_t usage = kDefaultImageUsage,
+                     int32_t maxImages = kDefaultImageCount);
 
-	int stopCapture();
+    int stopCapture();
+
 private:
-	int32_t mWidth;
-	int32_t mHeight;
-	int32_t mFormat;
-	uint64_t mUsage;
-	uint32_t mMaxImages;
+    int32_t mWidth;
+    int32_t mHeight;
+    int32_t mFormat;
+    uint64_t mUsage;
+    uint32_t mMaxImages;
 
-	size_t mAcquiredImageCount{ 0 };
+    size_t mAcquiredImageCount{0};
 
-	std::mutex mImageMutex;
+    std::mutex mImageMutex;
 
-	AImageReader* mImgReader{ nullptr };
+    AImageReader* mImgReader{nullptr};
 
-	ANativeWindow* mImgReaderAnw{ nullptr };
+    ANativeWindow* mImgReaderAnw{nullptr};
 
-	int initImageReader();
+    int initImageReader();
 
-	static void onImageAvailable(void* obj, AImageReader* reader);
+    static void onImageAvailable(void* obj, AImageReader* reader);
 
-	AImageReader_ImageListener mReaderAvailableCb{ this, onImageAvailable };
+    AImageReader_ImageListener mReaderAvailableCb{this, onImageAvailable};
 
-	void handleImageAvailable(AImageReader* reader);
+    void handleImageAvailable(AImageReader* reader);
 
+    static void onDeviceDisconnected(void* /*obj*/, ACameraDevice* /*device*/) {
+    }
+    static void onDeviceError(void* /*obj*/, ACameraDevice* /*device*/,
+                              int /*errorCode*/) {}
 
-	static void onDeviceDisconnected(void* /*obj*/, ACameraDevice* /*device*/) {}
-	static void onDeviceError(void* /*obj*/, ACameraDevice* /*device*/, int /*errorCode*/) {}
+    static void onSessionClosed(void* /*obj*/,
+                                ACameraCaptureSession* /*session*/) {}
+    static void onSessionReady(void* /*obj*/,
+                               ACameraCaptureSession* /*session*/) {}
+    static void onSessionActive(void* /*obj*/,
+                                ACameraCaptureSession* /*session*/) {}
 
-	static void onSessionClosed(void* /*obj*/, ACameraCaptureSession* /*session*/) {}
-	static void onSessionReady(void* /*obj*/, ACameraCaptureSession* /*session*/) {}
-	static void onSessionActive(void* /*obj*/, ACameraCaptureSession* /*session*/) {}
+    ACameraDevice_StateCallbacks mDeviceCb{this, onDeviceDisconnected,
+                                           onDeviceError};
+    ACameraCaptureSession_stateCallbacks mSessionCb{
+        this, onSessionClosed, onSessionReady, onSessionActive};
 
-	ACameraDevice_StateCallbacks mDeviceCb{ this, onDeviceDisconnected, onDeviceError };
-	ACameraCaptureSession_stateCallbacks mSessionCb{
-	  this, onSessionClosed, onSessionReady, onSessionActive };
+    const char* mCameraId{nullptr};
+    // Camera manager
+    ACameraManager* mCameraManager{nullptr};
+    ACameraIdList* mCameraIdList{nullptr};
+    // Camera device
+    ACameraMetadata* mCameraMetadata{nullptr};
+    ACameraDevice* mDevice{nullptr};
+    // Capture session
+    ACaptureSessionOutputContainer* mOutputs{nullptr};
+    ACaptureSessionOutput* mImgReaderOutput{nullptr};
+    ACameraCaptureSession* mSession{nullptr};
+    // Capture request
+    ACaptureRequest* mCaptureRequest{nullptr};
+    ACameraOutputTarget* mReqImgReaderOutput{nullptr};
 
-
-	const char* mCameraId{ nullptr };
-	// Camera manager
-	ACameraManager* mCameraManager{ nullptr };
-	ACameraIdList* mCameraIdList{ nullptr };
-	// Camera device
-	ACameraMetadata* mCameraMetadata{ nullptr };
-	ACameraDevice* mDevice{ nullptr };
-	// Capture session
-	ACaptureSessionOutputContainer* mOutputs{ nullptr };
-	ACaptureSessionOutput* mImgReaderOutput{ nullptr };
-	ACameraCaptureSession* mSession{ nullptr };
-	// Capture request
-	ACaptureRequest* mCaptureRequest{ nullptr };
-	ACameraOutputTarget* mReqImgReaderOutput{ nullptr };
-
-	int initCamera();
+    int initCamera();
 };
 
-}
+}  // namespace android
 
-#endif //USB_DEVICE_CAMERACAPTURE_H
+#endif  // USB_DEVICE_CAMERACAPTURE_H

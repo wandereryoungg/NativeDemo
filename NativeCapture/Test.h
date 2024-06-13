@@ -9,8 +9,9 @@
 
 #define ALOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 
-template <typename T> void testSize() {
-	ALOGI("%s   size: %lu", __func__, sizeof(T));
+template <typename T>
+void testSize() {
+    ALOGI("%s   size: %lu", __func__, sizeof(T));
 }
 
-#endif //NATIVECAPTURE_TEST_H
+#endif  // NATIVECAPTURE_TEST_H

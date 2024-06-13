@@ -9,12 +9,12 @@ namespace android {
 
 class YoungTest {
 public:
-	YoungTest();
+    YoungTest();
 
-	~YoungTest();
+    ~YoungTest();
 
-	static YoungTest* getInstance();
+    static YoungTest* getInstance();
 };
 
-}
-#endif //NATIVECAPTURE_YOUNGTEST_H
+}  // namespace android
+#endif  // NATIVECAPTURE_YOUNGTEST_H

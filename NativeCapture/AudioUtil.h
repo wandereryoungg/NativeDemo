@@ -7,67 +7,71 @@
 
 #include <SLES/OpenSLES.h>
 #include <SLES/OpenSLES_Android.h>
+
 #include <mutex>
+
 
 namespace android {
 
 class AudioUtil {
 public:
-	AudioUtil();
+    AudioUtil();
 
-	~AudioUtil();
+    ~AudioUtil();
 
-	static AudioUtil* getInstance();
+    static AudioUtil* getInstance();
 
-	void createEngine();
+    void createEngine();
 
-	void createBufferQueueAudioPlayer();
+    void createBufferQueueAudioPlayer();
 
-	static void bqPlayerCallback(SLAndroidSimpleBufferQueueItf bq, void* context);
+    static void bqPlayerCallback(SLAndroidSimpleBufferQueueItf bq,
+                                 void* context);
 
-	void createAudioRecorder();
+    void createAudioRecorder();
 
-	static void bqRecorderCallback(SLAndroidSimpleBufferQueueItf bq, void* context);
+    static void bqRecorderCallback(SLAndroidSimpleBufferQueueItf bq,
+                                   void* context);
 
-	void startRecording();
+    void startRecording();
 
-	void startPlaying();
+    void startPlaying();
 
 private:
-	void shutdown();
+    void shutdown();
 
-	SLObjectItf engineObject;
+    SLObjectItf engineObject;
 
-	SLEngineItf engineEngine;
+    SLEngineItf engineEngine;
 
-	SLObjectItf outputMixObject;
+    SLObjectItf outputMixObject;
 
-	SLEnvironmentalReverbItf outputMixEnvironmentalReverb;
+    SLEnvironmentalReverbItf outputMixEnvironmentalReverb;
 
-	const SLEnvironmentalReverbSettings reverbSettings = SL_I3DL2_ENVIRONMENT_PRESET_STONECORRIDOR;
+    const SLEnvironmentalReverbSettings reverbSettings =
+        SL_I3DL2_ENVIRONMENT_PRESET_STONECORRIDOR;
 
-	// buffer queue player interfaces
-	SLObjectItf bqPlayerObject;
+    // buffer queue player interfaces
+    SLObjectItf bqPlayerObject;
 
-	SLPlayItf bqPlayerPlay;
+    SLPlayItf bqPlayerPlay;
 
-	SLAndroidSimpleBufferQueueItf bqPlayerBufferQueue;
+    SLAndroidSimpleBufferQueueItf bqPlayerBufferQueue;
 
-	SLEffectSendItf bqPlayerEffectSend;
+    SLEffectSendItf bqPlayerEffectSend;
 
-	SLVolumeItf bqPlayerVolume;
+    SLVolumeItf bqPlayerVolume;
 
-	SLmilliHertz bqPlayerSampleRate = SL_SAMPLINGRATE_32;
+    SLmilliHertz bqPlayerSampleRate = SL_SAMPLINGRATE_32;
 
-	// recorder interfaces
-	SLObjectItf recorderObject;
+    // recorder interfaces
+    SLObjectItf recorderObject;
 
-	SLRecordItf recorderRecord;
+    SLRecordItf recorderRecord;
 
-	SLAndroidSimpleBufferQueueItf recorderBufferQueue;
-
+    SLAndroidSimpleBufferQueueItf recorderBufferQueue;
 };
 
-}
+}  // namespace android
 
-#endif //NATIVECAPTURE_AUDIOUTIL_H
+#endif  // NATIVECAPTURE_AUDIOUTIL_H

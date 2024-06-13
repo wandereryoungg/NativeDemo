@@ -1,9 +1,9 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
-TARGET_ARCH_ABI := arm64-v8a
-OPENCV_LIB_TYPE := STATIC
-include $(LOCAL_PATH)/OpenCV-android-sdk/sdk/native/jni/OpenCV.mk
+#TARGET_ARCH_ABI := arm64-v8a
+#OPENCV_LIB_TYPE := STATIC
+#include $(LOCAL_PATH)/OpenCV-android-sdk/sdk/native/jni/OpenCV.mk
 
 LOCAL_MODULE := NativeCapture
 

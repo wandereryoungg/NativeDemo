@@ -11,8 +11,7 @@
 
 namespace android {
 
-class DisplayEventTracker : public Thread
-{
+class DisplayEventTracker : public Thread {
 public:
     explicit DisplayEventTracker(int vsyncRate);
     virtual ~DisplayEventTracker();
@@ -20,8 +19,8 @@ public:
     void requestNextVsync();
 
 private:
-    virtual bool        threadLoop();
-    virtual status_t    readyToRun();
+    virtual bool threadLoop();
+    virtual status_t readyToRun();
     void processDisplayEvents();
 
     // Display event handling
@@ -34,12 +33,6 @@ private:
 
 // ---------------------------------------------------------------------------
 
-}; // namespace android
+};  // namespace android
 
-#endif // DISPLAY_EVENT_TRACKER_H
-
-
-
-
-
-
+#endif  // DISPLAY_EVENT_TRACKER_H
