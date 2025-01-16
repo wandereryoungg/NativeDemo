@@ -8,6 +8,7 @@ cc_binary {
         "libui",
         "libgui",
         "libutils",
+        "liblog",
     ],
     static_libs: ["libglTest"],
     cflags: [
