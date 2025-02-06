@@ -6,7 +6,7 @@ cc_binary {
         "libcutils",
         "liblog",
         "libutils",
-	"libbinder",
+        "libbinder",
     ],
     compile_multilib: "64",
 }

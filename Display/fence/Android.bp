@@ -1,4 +1,4 @@
-cc_test {
+cc_binary {
     name: "fence",
     srcs: [
         "fence.cpp",
@@ -9,21 +9,21 @@ cc_test {
     ],
     cppflags: [
         "-Wno-unused-variable",
-	"-Wno-uninitialized",
+        "-Wno-uninitialized",
     ],
     shared_libs: [
-    	"libbase",
+        "libbase",
         "libcutils",
         "libEGL",
         "libGLESv2",
-	"libsync",
-	"libGLESv1_CM",
+        "libsync",
+        "libGLESv1_CM",
         "libGLESv2",
         "libui",
         "libgui",
         "libutils",
-	"libandroid",
-	"libnativewindow",
+        "libandroid",
+        "libnativewindow",
         "libprocessgroup",
     ],
     static_libs: ["libglTest"],

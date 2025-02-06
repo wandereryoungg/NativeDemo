@@ -47,7 +47,7 @@ static int drm_create_fb(int fd, drm_context *drm_con) {
     drm_con->vaddr = (uint8_t *)mmap(0, drm_create.size, PROT_READ | PROT_WRITE,
                                      MAP_SHARED, fd, drm_map.offset);
     for (int i = 0; i < drm_con->size / 4; i++) {
-        *((uint32_t *)drm_con->vaddr + i) = 0x00FF00;
+        *((uint32_t *)drm_con->vaddr + i) = 0xFFFF00;
     }
     return 0;
 }

@@ -1,7 +1,7 @@
 cc_binary {
     name: "drm_display",
     srcs: [
-	"drm_display.cpp",
+        "drm_display.cpp",
     ],
     shared_libs: ["libdrm"],
 }

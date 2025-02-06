@@ -83,13 +83,14 @@ int main(int argc, char *argv[]) {
 
     sp<Surface> surface = surfaceControl->getSurface();
     FILE *fp = fopen(argv[1], "rb");
-    int width = 640;
-    int height = 480;
+    int width = 3840;
+    int height = 2160;
 
     int size = width * height * 3 / 2;
     std::vector<unsigned char> data(size);
 
-    while (feof(fp) == 0) {
+    // while (feof(fp) == 0) {
+    while (true) {
         int num = fread(data.data(), 1, size, fp);
         usleep(40 * 1000);
         render(data.data(), size, surface, width, height);

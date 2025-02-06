@@ -10,8 +10,8 @@ cc_binary {
         "libutils",
     ],
     cflags: [
-	"-Wno-unused-parameter",
-	"-Wno-unused-const-variable",
-	"-Wno-unused-variable",
+        "-Wno-unused-parameter",
+        "-Wno-unused-const-variable",
+        "-Wno-unused-variable",
     ],
 }

@@ -46,8 +46,7 @@ int main(void) {
     int fd = open("/dev/kgsl-3d0", O_RDWR);
     ioctl(fd, IOCTL_KGSL_GPUMEM_ALLOC, &kpa);
 
-    void *map_buf =
-        mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, kpa.gpuaddr);
+    void *map_buf = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, kpa.gpuaddr);
     std::string writebuf = "Hello GPU Memory!";
     memcpy(map_buf, writebuf.c_str(), writebuf.size());
 

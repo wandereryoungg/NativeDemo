@@ -47,6 +47,8 @@ int main() {
     struct ion_fd_data fd_data;
 
     ion_fd = open("/dev/ion", O_RDWR);
+    printf("%s   ion_fd: %d\n", __func__, ion_fd);
+
     memset(&alloc_data, 0, sizeof(alloc_data));
 
     alloc_data.len = size;
@@ -59,8 +61,12 @@ int main() {
     rc = ioctl(ion_fd, ION_IOC_MAP, &fd_data);
 
     shared_fd = fd_data.fd;
-    shared_buffer =
-        mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd_data.fd, 0);
+    printf("%s   shared_fd: %d\n", __func__, shared_fd);
+    shared_buffer = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd_data.fd, 0);
+    if (shared_buffer == MAP_FAILED) {
+        printf("%s   mmap failed: %s\n", __func__, strerror(errno));
+    }
+
     std::string tmpbuf = "Hello ION Memory!";
     memcpy(shared_buffer, tmpbuf.c_str(), tmpbuf.size());
 

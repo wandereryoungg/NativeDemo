@@ -12,9 +12,9 @@ cc_binary {
     ],
     static_libs: ["libglTest"],
     cflags: [
-	"-Wno-unused-parameter",
-	"-Wno-unused-const-variable",
-	"-Wno-unused-variable",
-	"-Wno-uninitialized",
+        "-Wno-unused-parameter",
+        "-Wno-unused-const-variable",
+        "-Wno-unused-variable",
+        "-Wno-uninitialized",
     ],
 }
